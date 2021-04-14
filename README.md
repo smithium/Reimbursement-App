@@ -12,12 +12,22 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 - AJAX
 - Servlets
 
+## Functionality
+
+- users can sign up for an account with a username and password
+- users can then submit reimbursment requests or look at existing ones
+- admins can look at reimbursment requests and approve or deny them
+
 ## Getting Started
+#### This project requires Intellij to run
 #### Clone this repository
 https://github.com/smithium/Reimbursement-App.git
 
 #### Switch to Master Branch
 
 #### Configure to run on Tomcat
+- in Intellij, configure tomcat's URL to http://localhost:8080/Project1_2_war_exploded/
+
+#### run the program
 
 
