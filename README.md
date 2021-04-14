@@ -18,3 +18,6 @@ https://github.com/smithium/Reimbursement-App.git
 
 #### Switch to Master Branch
 
+#### Configure to run on Tomcat
+
+
