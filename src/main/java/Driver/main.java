@@ -7,8 +7,12 @@ import dao.UserDao;
 
 import java.sql.Date;
 import java.sql.Timestamp;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
+
 
 public class main {
+    public final static Logger logger = Logger.getLogger(main.class);
     public static void main(String[] args){
         UserDao dao = new UserDao();
         ReimbursementDao rdao = new ReimbursementDao();
@@ -47,6 +51,9 @@ public class main {
         rdao.insertReimbursement(addReib);
 
          */
+        User LogginUser = dao.getUserByLogginInfo("smithium","password");
+
+        System.out.println(rdao.getAllReimbursements());
 
     }
 }

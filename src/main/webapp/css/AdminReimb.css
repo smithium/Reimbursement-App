@@ -1,0 +1,35 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: SansSerif, serif;
+    font-size: large;
+
+    background-image: url("background3.jpg");
+    background-size: cover;
+    text-align: center;
+}
+table, th,td {
+    border: 1px solid grey;
+}
+table{
+    width: 75%;
+}
+#rebTableAdmin{
+    position: center;
+    background-color: lightsteelblue;
+    margin-left: 30%;
+}
+#approveReq{
+    margin: 50px;
+}
+#denyReq{
+    margin: 50px;
+}
+#goBack2{
+    margin: 50px;
+}
+input[type=submit]{
+    width: 20em;
+    height: 5em;
+}
+

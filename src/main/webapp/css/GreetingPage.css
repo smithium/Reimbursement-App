@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: SansSerif, serif;
+    font-size: large;
+
+    background-image: url("background3.jpg");
+    background-size: cover;
+}
+
+.container{
+
+    text-align: center;
+
+}
+input[type=submit]{
+    width: 20em;
+    height: 5em;
+}
+#lookatreimbursements{
+    margin: 50px;
+
+}
+#newReimbursement{
+    margin: 50px;
+}
+#logout{
+    margin: 50px;
+}
+
+

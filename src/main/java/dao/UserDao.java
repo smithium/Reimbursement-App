@@ -11,6 +11,7 @@ import java.util.List;
 
 public class UserDao {
 
+
     private String url = "jdbc:postgresql://project1db.c8vjwn4ozwqs.us-east-2.rds.amazonaws.com:5432/companydb";
     private String username = "dbadmin";
     private String password = "password";
@@ -58,8 +59,10 @@ public class UserDao {
 
     public User getUserByLogginInfo(String username, String password){
 
+
         User newUser = new User();
         try {
+            Class.forName("org.postgresql.Driver");
             Connection conn = DriverManager.getConnection(this.url, this.username, this.password);
 
             String sql = "SELECT * from users where username = ?";
@@ -91,7 +94,10 @@ public class UserDao {
             }
         }catch (SQLException e){
             e.printStackTrace();
+        }catch(ClassNotFoundException e){
+            System.out.println("class not found");
         }
+
 
         if(!newUser.getUserPassword().equals(password)){
             throw new invalidLogin();

@@ -2,6 +2,7 @@ package beans;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Reimbursement {
     private int ID;
@@ -15,10 +16,23 @@ public class Reimbursement {
     private ReimbursementType type;
 
     public static enum ReimbursementStatus {
-        OPEN, RESOLVED
+        OPEN, RESOLVED, APPROVED, DENIED
     }
     public static enum ReimbursementType {
         LODGING, TRAVEL,FOOD,OTHER
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Reimbursement)) return false;
+        Reimbursement that = (Reimbursement) o;
+        return getID() == that.getID() && getAmount() == that.getAmount() && Objects.equals(getSubmitted(), that.getSubmitted()) && Objects.equals(getResolved(), that.getResolved()) && Objects.equals(getDescription(), that.getDescription()) && Objects.equals(getAuthor(), that.getAuthor()) && Objects.equals(getResolver(), that.getResolver()) && getStatus() == that.getStatus() && getType() == that.getType();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getID(), getAmount(), getSubmitted(), getResolved(), getDescription(), getAuthor(), getResolver(), getStatus(), getType());
     }
 
     public int getID() {

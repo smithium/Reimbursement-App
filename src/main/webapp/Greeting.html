@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="/Project1_2_war_exploded/css/GreetingPage.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h3>Hello User </h3>
+    <h3 id="helloUser">INVALID USER</h3>
+    <h3>What would you like to do</h3>
+
+    <form id="lookatreimbursements" action="/Project1_2_war_exploded/ViewReimbursements.html">
+        <input type="submit" value="Look at your submitted Reimbursements" />
+    </form>
+
+    <form id="newReimbursement" action="/Project1_2_war_exploded/NewReimb.html">
+        <input type="submit" value="Submit New Reimbursements" />
+    </form>
+
+    <form id="logout" method="get" action="logout.change">
+        <input type="submit" value="logout" />
+    </form>
+</div>
+
+<script src="/Project1_2_war_exploded/js/greetingpage.js"></script>
+</body>
+</html>

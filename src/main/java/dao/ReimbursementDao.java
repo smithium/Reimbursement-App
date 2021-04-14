@@ -1,5 +1,8 @@
 package dao;
 import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
+
 import beans.User;
 import beans.Reimbursement;
 
@@ -41,6 +44,12 @@ public class ReimbursementDao {
                     case 2 :
                         returnReimb.setStatus(Reimbursement.ReimbursementStatus.RESOLVED);
                         break;
+                    case 3 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.APPROVED);
+                        break;
+                    case 4 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.DENIED);
+                        break;
 
                 }
                 int type = rs.getInt("reimb_type_id");
@@ -68,6 +77,174 @@ public class ReimbursementDao {
         return returnReimb;
     }
 
+    public List<Reimbursement> getReimbursementByUser(User u){
+        List<Reimbursement> ReturnList = new LinkedList<>();
+        UserDao udao = new UserDao();
+
+        try{
+
+            Connection conn = DriverManager.getConnection(this.url, this.username, this.password);
+            String sql = "select * from ers_reimbursement where reimb_author = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1,u.getUserId());
+
+            ResultSet rs = ps.executeQuery();
+
+            while(rs.next()){
+                Reimbursement returnReimb = new Reimbursement();
+                returnReimb.setID(rs.getInt("reimb_id"));
+                returnReimb.setAmount(rs.getInt("reimb_amount"));
+                returnReimb.setSubmitted(rs.getTimestamp("reimb_submitted"));
+                returnReimb.setResolved(rs.getTimestamp("reimb_resolved"));
+                returnReimb.setDescription(rs.getString("reimb_description"));
+                returnReimb.setAuthor(u);
+                returnReimb.setResolver(udao.getUser(rs.getInt("reimb_resolver")));
+
+                int status = rs.getInt("reimb_status_id");
+                switch (status){
+                    case 1 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.OPEN);
+                        break;
+                    case 2 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.RESOLVED);
+                        break;
+                    case 3 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.APPROVED);
+                        break;
+                    case 4 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.DENIED);
+                        break;
+
+                }
+                int type = rs.getInt("reimb_type_id");
+
+                switch (type){
+                    case 1:
+                        returnReimb.setType(Reimbursement.ReimbursementType.LODGING);
+                        break;
+                    case 2:
+                        returnReimb.setType(Reimbursement.ReimbursementType.TRAVEL);
+                        break;
+                    case 3:
+                        returnReimb.setType(Reimbursement.ReimbursementType.FOOD);
+                        break;
+                    case 4:
+                        returnReimb.setType(Reimbursement.ReimbursementType.OTHER);
+                        break;
+                }
+                ReturnList.add(returnReimb);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return ReturnList;
+    }
+
+    public void ApproveReimbursement(Integer id){
+        try {
+            System.out.println("approving " + id);
+            Connection conn = DriverManager.getConnection(this.url, this.username, this.password);
+            String sql = "update ers_reimbursement set reimb_status_id = 3 where reimb_id = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1,id);
+
+            ps.executeUpdate();
+
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+    public void DenyReimbursement(Integer id){
+        try {
+            System.out.println("approving " + id);
+            Connection conn = DriverManager.getConnection(this.url, this.username, this.password);
+            String sql = "update ers_reimbursement set reimb_status_id = 4 where reimb_id = ?";
+
+            PreparedStatement ps = conn.prepareStatement(sql);
+
+            ps.setInt(1,id);
+
+            ps.executeUpdate();
+
+
+
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public List<Reimbursement> getAllReimbursements(){
+        List<Reimbursement> ReturnList = new LinkedList<>();
+        UserDao udao = new UserDao();
+
+        try{
+
+            Connection conn = DriverManager.getConnection(this.url, this.username, this.password);
+            String sql = "select * from ers_reimbursement";
+
+            Statement s = conn.createStatement();
+            ResultSet rs = s.executeQuery(sql);
+
+
+            while(rs.next()){
+                Reimbursement returnReimb = new Reimbursement();
+                returnReimb.setID(rs.getInt("reimb_id"));
+                returnReimb.setAmount(rs.getInt("reimb_amount"));
+                returnReimb.setSubmitted(rs.getTimestamp("reimb_submitted"));
+                returnReimb.setResolved(rs.getTimestamp("reimb_resolved"));
+                returnReimb.setDescription(rs.getString("reimb_description"));
+                returnReimb.setAuthor(udao.getUser(rs.getInt("reimb_author")));
+                returnReimb.setResolver(udao.getUser(rs.getInt("reimb_resolver")));
+
+                int status = rs.getInt("reimb_status_id");
+                switch (status){
+                    case 1 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.OPEN);
+                        break;
+                    case 2 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.RESOLVED);
+                        break;
+                    case 3 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.APPROVED);
+                        break;
+                    case 4 :
+                        returnReimb.setStatus(Reimbursement.ReimbursementStatus.DENIED);
+                        break;
+
+                }
+                int type = rs.getInt("reimb_type_id");
+
+                switch (type){
+                    case 1:
+                        returnReimb.setType(Reimbursement.ReimbursementType.LODGING);
+                        break;
+                    case 2:
+                        returnReimb.setType(Reimbursement.ReimbursementType.TRAVEL);
+                        break;
+                    case 3:
+                        returnReimb.setType(Reimbursement.ReimbursementType.FOOD);
+                        break;
+                    case 4:
+                        returnReimb.setType(Reimbursement.ReimbursementType.OTHER);
+                        break;
+                }
+                ReturnList.add(returnReimb);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+
+        return ReturnList;
+    }
     public void insertReimbursement(Reimbursement r){
         try{
             Connection conn = DriverManager.getConnection(this.url, this.username, this.password);
@@ -88,16 +265,26 @@ public class ReimbursementDao {
                 case RESOLVED:
                     ps.setInt(8,2);
                     break;
+                case APPROVED:
+                    ps.setInt(8,3);
+                    break;
+                case DENIED:
+                    ps.setInt(8,4);
             }
+            System.out.println(r.getType());
             switch (r.getType()){
                 case LODGING:
                     ps.setInt(9,1);
+                    break;
                 case TRAVEL:
                     ps.setInt(9,2);
+                    break;
                 case FOOD:
                     ps.setInt(9,3);
+                    break;
                 case OTHER:
                     ps.setInt(9,4);
+                    break;
             }
             ps.execute();
         }catch (SQLException e){

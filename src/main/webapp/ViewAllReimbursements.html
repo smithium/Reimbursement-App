@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>View All Reimbursements</title>
+    <link rel="stylesheet" href="/Project1_2_war_exploded/css/AdminReimb.css">
+</head>
+<body>
+
+<table id="rebTableAdmin" style="width:40%">
+    <tr>
+        <th>ID</th>
+        <th>EMPLOYEE</th>
+        <th>TYPE</th>
+        <th>AMOUNT</th>
+        <th>STATUS</th>
+        <th>DESCRIPTION</th>
+    </tr>
+</table>
+    <form id="approveReq" method = "post" action="Approve.json">
+        <h3>Approve Reimbursement: (Enter ID)</h3>
+        <input placeholder="ID" name="id"/><br/>
+        <input id="approve button" type ="submit" value="Approve"/>
+    </form>
+
+    <form id="denyReq" method = "post" action="Deny.json">
+        <h3>DenyReimbursement: (Enter ID)</h3>
+        <input placeholder="ID" name="id"/><br/>
+        <input id="deny button" type ="submit" value="Deny"/>
+
+    </form>
+<form id="goBack2" action="/Project1_2_war_exploded/AdminGreeting.html">
+    <input type="submit" value="Go back to home page" />
+</form>
+    <script src="/Project1_2_war_exploded/js/AdminReimbView.js"></script>
+</table>
+</body>
+</html>

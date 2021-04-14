@@ -1,14 +1,13 @@
-package com.example.Project1_2;
+package Servlets;
 
-import Servlets.RequestHelper;
-
-import java.io.*;
-import javax.servlet.ServletException;
-import javax.servlet.http.*;
-import javax.servlet.annotation.*;
-
-@WebServlet(name = "helloServlet", urlPatterns = {"*.change", "/api/*"})
-public class HelloServlet extends HttpServlet {
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.*;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+@WebServlet(name = "MasterServlet", value = "/Master-Servlet")
+public class MasterServlet extends HttpServlet {
     private String message;
 
     public void init() {
@@ -28,4 +27,5 @@ public class HelloServlet extends HttpServlet {
     }
     public void destroy() {
     }
+
 }
