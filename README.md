@@ -14,5 +14,7 @@ The Expense Reimbursement System (ERS) will manage the process of reimbursing em
 
 ## Getting Started
 #### Clone this repository
-https://github.com/smithium/ProjectApp.git
+https://github.com/smithium/Reimbursement-App.git
+
+#### Switch to Master Branch
 
